@@ -145,3 +145,33 @@ Auditpol /set /subcategory:"Security State Change" /success:enable /failure:enab
 Auditpol /set /subcategory:"Security System Extension" /success:enable /failure:enable
 Auditpol /set /subcategory:"System Integrity" /success:enable /failure:enable
 ```
+# Misc Hardening
+
+### Disabling Autoplay/Autorun to Partially Disarm Malicious Storage Devices
+
+Script block below will disable autoplay/autorun for all drives:
+
+```powershell
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v NoAutoplayfornonVolume /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v NoDriveTypeAutoRun /t REG_DWORD /d 255 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoAutorun /t REG_DWORD /d 1 /f
+```
+
+### Enable Hardening of LSASS to Reduce Ability to Dump Creds
+
+Script block below will harden LSASS against crendential dumping, but nothing is bulletproof:
+
+```powershell
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\LSASS.exe" /v AuditLevel /t REG_DWORD /d 00000008 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v RunAsPPL /t REG_DWORD /d 00000001 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation" /v AllowProtectedCreds /t REG_DWORD /d 1 /f
+```
+
+### Enable Hardening of AMSI
+
+For a better explanation than I could ever hope to write myself please see https://b4rtik.github.io/posts/antimalware-scan-interface-provider-for-persistence/
+
+To enable Authenticode + Windows Hardware Quality Labs (WHQL) signature checks for AMSI providers use the scriptblock below:
+
+```powershell
+reg add "HKLM\SOFTWARE\Microsoft\AMSI" /v FeatureBits /t REG_DWORD /d 2 /f
