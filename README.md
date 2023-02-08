@@ -16,10 +16,11 @@ ftype jsefile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype vbefile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ```
 
-For extra credit you can also disable ability for automatic mounting of ISO/VHD/VHDX/IMG files in file explorer
+For extra credit you can also disable ability for automatic mounting of ISO/VHD/VHDX/IMG files in file explorer. This will prevent users from doubleclick mounting these files which is are used often by threat actors for evasion. **Thanks to @Harlan Carvey for the correction on the VHD portion.
 
 ```powershell
 reg add "HKEY_CLASSES_ROOT\Windows.IsoFile\shell\mount" /v "ProgrammaticAccessOnly" /t REG_SZ /d no /f
+reg add "HKEY_CLASSES_ROOT\Windows.VhdFile\shell\mount" /v "ProgrammaticAccessOnly" /t REG_SZ /d no /f
 ```
 
 # Adblocking Everywhere
