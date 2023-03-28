@@ -158,6 +158,24 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v No
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoAutorun /t REG_DWORD /d 1 /f
 ```
 
+### Disabling Autoplay/Autorun to Partially Disarm Malicious Storage Devices
+
+The script block below will reduce ability of a TA to deliver malware via MS OneNote. Thanks to @keydet89 and @Purp1eW0lf @Huntress for the script! https://www.huntress.com/blog/addressing-initial-access
+
+
+```powershell
+#Run as Administrator, copy/paste the below
+# Mount HKU  
+mount -PSProvider Registry -Name HKU -Root HKEY_USERS;
+# Loop through each HKU/user's HKCU, AND deploy OneNote defences 
+(gci -path "HKU:\*\Software\Microsoft\Office\*\OneNote\Options\").PsPath | 
+Foreach-Object {New-ItemProperty -Path $_ -Name "disableembeddedfiles" -Value 1 -type DWORD -verbose};
+(gci -path "HKU:\*\Software\Microsoft\Office\*\OneNote\Options\").PsPath | 
+Foreach-Object {New-Item -Path "$_\embeddedfileopenoptions" -verbose};
+(gci -path "HKU:\*\Software\Microsoft\Office\*\OneNote\Options\").PsPath |
+Foreach-Object {New-ItemProperty -Path "$_\embeddedfileopenoptions" -Name "blockedextensions" -type string -value ".js;.exe;.bat;.vbs;.com;.scr;.cmd;.ps1;.zip;.dll" -verbose}
+```
+
 ### Enable Hardening of LSASS to Reduce Ability to Dump Creds
 
 Script block below will harden LSASS against crendential dumping, but nothing is bulletproof:
