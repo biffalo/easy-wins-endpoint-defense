@@ -158,7 +158,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v No
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoAutorun /t REG_DWORD /d 1 /f
 ```
 
-### Disabling Autoplay/Autorun to Partially Disarm Malicious Storage Devices
+### Hardening Microsoft OneNote 
 
 The script block below will reduce ability of a TA to deliver malware via MS OneNote. Thanks to @keydet89 and @Purp1eW0lf @Huntress for the script! https://www.huntress.com/blog/addressing-initial-access
 
