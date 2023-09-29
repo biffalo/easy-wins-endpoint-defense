@@ -14,6 +14,7 @@ ftype wsffile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype jsfile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype jsefile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ftype vbefile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
+ftype vbsfile="%SystemRoot%\system32\NOTEPAD.EXE" "%1"
 ```
 
 For extra credit you can also disable ability for automatic mounting of ISO/VHD/VHDX/IMG files in file explorer. This will prevent users from doubleclick mounting these files which is are used often by threat actors for evasion. **Thanks to @Harlan Carvey for the correction on the VHD portion.
