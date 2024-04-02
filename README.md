@@ -161,7 +161,8 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v No
 
 ### Hardening Microsoft OneNote 
 
-The script block below will reduce ability of a TA to deliver malware via MS OneNote. Thanks to @keydet89 and @Purp1eW0lf @Huntress for the script! https://www.huntress.com/blog/addressing-initial-access
+The script block below will reduce ability of a TA to deliver malware via MS OneNote. Thanks to @keydet89 and @Purp1eW0lf @Huntress for the original script! https://www.huntress.com/blog/addressing-initial-access
+Some additional file extenstions have been added for additional coverage🛟.
 
 
 ```powershell
