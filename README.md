@@ -112,9 +112,9 @@ FSRM (for windows servers only) - allows you to create "file screens" to allow o
 
 There are two ways to approach using FSRM for this purpose:
 
-- Blocking known ransomware file extensions while allowing all other file types. https://github.com/nexxai/CryptoBlocker 
+- Blocking known ransomware file extensions while allowing all other file types. https://github.com/nexxai/CryptoBlocker
     
-- Blocking ALL file extensions except for ones you specify. Ideal if you know with 100% what file ext should exist in a given share or location  https://github.com/biffalo/handy-posh/blob/main/fsrm-backup-protect.ps1 
+- Blocking ALL file extensions except for ones you specify. Ideal if you know with 100% what file ext should exist in a given share or location  https://github.com/biffalo/handy-posh/blob/main/fsrm-backup-protect.ps1
 
 ## Extra Logging
 
@@ -122,7 +122,7 @@ Prevention is all fine and dandy, but we need to work under the assumption that 
 
 **Sysmon** \- If you don't have sysmon enabled in your environment you are very much missing out.  The sheer amount of info you can glean from parsing sysmon logs is not just great for infosec, but even application debugging. For implementation and more info please refer to https://github.com/SwiftOnSecurity/sysmon-config
 
-**Builtin Windows Logging** \- Windows by default does not log much and what it does log... it doesn't keep for a very long time. The script block below enables larger log file sizes and additional events including Powershell script block logging. 
+**Builtin Windows Logging** \- Windows by default does not log much and what it does log... it doesn't keep for a very long time. The script block below enables larger log file sizes and additional events including Powershell script block logging.
 
 ```powershell
 wevtutil sl Security /ms:1024000
@@ -159,7 +159,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v No
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoAutorun /t REG_DWORD /d 1 /f
 ```
 
-### Hardening Microsoft OneNote 
+### Hardening Microsoft OneNote
 
 The script block below will reduce ability of a TA to deliver malware via MS OneNote. Thanks to @keydet89 and @Purp1eW0lf @Huntress for the original script! https://www.huntress.com/blog/addressing-initial-access
 Some additional file extenstions have been added for additional coverage🛟.
